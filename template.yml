@@ -40,16 +40,17 @@ Resources:
             Method: post
 
   Hello:
-    Type: AWS::Serverless:Function
+    Type: AWS::Serverless::Function
     Properties:
       Handler: hello.handler
       Runtime: python3.6
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-        Events:
-          GetEvent:
-            Type: Api
-            Properties:
-              Path: /hello/{name}
-              Method: get
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /hello/{name}
+            Method: get
+
